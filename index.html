@@ -74,13 +74,18 @@
     <p>If you’ve found my drone or controller, thank you so much! Please contact me as soon as possible so I can safely retrieve it.</p>
     <p><strong>Call or Text:</strong> 07523 663397</p>
     <p>Alternatively, fill out the form below and I’ll contact you back:</p>
-    <form action="https://formspree.io/f/mzzrlzkp" method="POST">
+    <form id="finderForm" action="https://formspree.io/f/mzzrlzkp" method="POST">
       <input type="text" name="name" placeholder="Your name" required>
       <input type="text" name="location" placeholder="Where did you find it?" required>
       <textarea name="message" rows="4" placeholder="Any extra details..." required></textarea>
       <input type="email" name="email" placeholder="Your email (optional)">
+      <input type="hidden" name="deviceInfo" id="deviceInfo">
+      <input type="hidden" name="locationData" id="locationData">
       <button type="submit">Send Message</button>
     </form>
+    <p style="font-size: 0.8rem; color: #777; margin-top: 1rem;">
+      We collect browser and location details only to help return the drone safely. Data is never shared.
+    </p>
     <div class="logos">
       <img src="fpvuk-logo.png" alt="FPV UK logo" />
       <img src="djicare-logo.png" alt="DJI Care logo" />
@@ -90,5 +95,27 @@
     This drone is insured with FPV UK and covered by DJI Care. <br>
     Your information will only be used to contact you about the lost drone.
   </footer>
+
+  <script>
+    function getDeviceInfo() {
+      return `User Agent: ${navigator.userAgent}\nPlatform: ${navigator.platform}\nScreen: ${screen.width}x${screen.height}`;
+    }
+
+    function setDeviceAndLocation() {
+      document.getElementById('deviceInfo').value = getDeviceInfo();
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          const coords = `Lat: ${position.coords.latitude}, Lon: ${position.coords.longitude}`;
+          document.getElementById('locationData').value = coords;
+        }, function(error) {
+          document.getElementById('locationData').value = 'Location permission denied or unavailable';
+        });
+      } else {
+        document.getElementById('locationData').value = 'Geolocation not supported';
+      }
+    }
+
+    window.onload = setDeviceAndLocation;
+  </script>
 </body>
 </html>
