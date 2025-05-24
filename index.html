@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lost Drone - DJI Mini 4 Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 1rem;
+      width: 100%;
+      text-align: center;
+    }
+    main {
+      max-width: 600px;
+      background: #fff;
+      margin: 2rem;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    form button {
+      background-color: #007aff;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      margin: 2rem 0;
+      font-size: 0.9rem;
+      color: #777;
+    }
+    .logos {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .logos img {
+      max-height: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Thanks for finding my DJI Mini 4 Pro!</h1>
+  </header>
+  <main>
+    <p>If you’ve found my drone or controller, thank you so much! Please contact me as soon as possible so I can safely retrieve it.</p>
+    <p><strong>Call or Text:</strong> 07523 663397</p>
+    <p>Alternatively, fill out the form below and I’ll contact you back:</p>
+    <form action="https://formspree.io/f/your-form-id" method="POST">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="text" name="location" placeholder="Where did you find it?" required>
+      <textarea name="message" rows="4" placeholder="Any extra details..." required></textarea>
+      <input type="email" name="email" placeholder="Your email (optional)">
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="logos">
+      <img src="fpvuk-logo.png" alt="FPV UK logo" />
+      <img src="djicare-logo.png" alt="DJI Care logo" />
+    </div>
+  </main>
+  <footer>
+    This drone is insured with FPV UK and covered by DJI Care. <br>
+    Your information will only be used to contact you about the lost drone.
+  </footer>
+</body>
+</html>
