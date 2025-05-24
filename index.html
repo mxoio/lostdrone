@@ -16,11 +16,16 @@
       align-items: center;
     }
     header {
-      background: #1a1a1a;
+      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
       color: #fff;
-      padding: 1rem;
+      padding: 2rem 1rem;
       width: 100%;
       text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
     }
     main {
       max-width: 600px;
@@ -32,6 +37,14 @@
     }
     h1 {
       color: #333;
+    }
+    a.tel-link {
+      color: #007aff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    a.tel-link:hover {
+      text-decoration: underline;
     }
     form input, form textarea {
       width: 100%;
@@ -68,11 +81,12 @@
 </head>
 <body>
   <header>
-    <h1>Thanks for finding my DJI Mini 4 Pro!</h1>
+    <h1>🚁 Thanks for finding my DJI Mini 4 Pro!</h1>
   </header>
   <main>
     <p>If you’ve found my drone or controller, thank you so much! Please contact me as soon as possible so I can safely retrieve it.</p>
-    <p><strong>Call or Text:</strong> 07523 663397</p>
+    <p><strong>Call or Text:</strong> <a class="tel-link" href="tel:07523663397">07523 663397</a></p>
+    <p><strong>Drone ID:</strong> ID-GBR-OP-Q85CQ49HY8L5</p>
     <p>Alternatively, fill out the form below and I’ll contact you back:</p>
     <form id="finderForm" action="https://formspree.io/f/mzzrlzkp" method="POST">
       <input type="text" name="name" placeholder="Your name" required>
