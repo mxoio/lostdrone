@@ -16,17 +16,11 @@
       align-items: center;
     }
     header {
-      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+      background: #1a1a1a;
       color: #fff;
-      padding: 2rem 1rem;
+      padding: 1rem;
       width: 100%;
       text-align: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
-    header h1 {
-      margin: 0;
-      font-size: 1.8rem;
-      color: #ffffff;
     }
     main {
       max-width: 600px;
@@ -38,14 +32,6 @@
     }
     h1 {
       color: #333;
-    }
-    a.tel-link {
-      color: #007aff;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    a.tel-link:hover {
-      text-decoration: underline;
     }
     form input, form textarea {
       width: 100%;
@@ -78,59 +64,100 @@
     .logos img {
       max-height: 40px;
     }
+    .privacy {
+      max-width: 600px;
+      background: #fff;
+      margin: 2rem;
+      padding: 1.5rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      color: #444;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      background: #222;
+      color: #fff;
+      padding: 1rem;
+      width: 100%;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    .cookie-banner button {
+      background: #007aff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      margin-left: 1rem;
+      cursor: pointer;
+    }
+    a.tel-link {
+      color: #007aff;
+      font-weight: bold;
+      text-decoration: none;
+    }
   </style>
+  <script>
+    window.onload = function() {
+      const cookieBanner = document.getElementById("cookie-banner");
+      const consent = localStorage.getItem("cookieConsent");
+      if (!consent) cookieBanner.style.display = "block";
+
+      document.getElementById("accept-cookies").onclick = function() {
+        localStorage.setItem("cookieConsent", "true");
+        cookieBanner.style.display = "none";
+      };
+
+      // Collect basic device info (with consent)
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          console.log("Location: ", position.coords.latitude, position.coords.longitude);
+        });
+      }
+      console.log("Browser Info:", navigator.userAgent);
+    };
+  </script>
 </head>
 <body>
+  <div id="cookie-banner" class="cookie-banner" style="display: none;">
+    This website uses cookies and may collect limited device data for recovery purposes. 
+    <button id="accept-cookies">Accept</button>
+  </div>
   <header>
-    <h1>🚁 Thanks for finding my DJI Mini 4 Pro!</h1>
+    <h1>Thanks for finding my DJI Mini 4 Pro!</h1>
   </header>
   <main>
     <p>If you’ve found my drone or controller, thank you so much! Please contact me as soon as possible so I can safely retrieve it.</p>
-    <p><strong>Call or Text:</strong> <a class="tel-link" href="tel:07760686643">07760686643</a></p>
-    <p><strong>Drone ID:</strong> ID-GBR-OP-Q85CQ49HY8L5</p>
+    <p><strong>Call or Text:</strong> <a class="tel-link" href="tel:07760686643">07760 686643</a></p>
     <p>Alternatively, fill out the form below and I’ll contact you back:</p>
-    <form id="finderForm" action="https://formspree.io/f/mzzrlzkp" method="POST">
+    <form action="https://formspree.io/f/mzzrlzkp" method="POST">
       <input type="text" name="name" placeholder="Your name" required>
       <input type="text" name="location" placeholder="Where did you find it?" required>
       <textarea name="message" rows="4" placeholder="Any extra details..." required></textarea>
       <input type="email" name="email" placeholder="Your email (optional)">
-      <input type="hidden" name="deviceInfo" id="deviceInfo">
-      <input type="hidden" name="locationData" id="locationData">
       <button type="submit">Send Message</button>
     </form>
-    <p style="font-size: 0.8rem; color: #777; margin-top: 1rem;">
-      We collect browser and location details only to help return the drone safely. Data is never shared.
-    </p>
     <div class="logos">
       <img src="fpvuk-logo.png" alt="FPV UK logo" />
       <img src="djicare-logo.png" alt="DJI Care logo" />
     </div>
   </main>
+  <section class="privacy">
+    <h2>Privacy & Terms</h2>
+    <p>This website is provided to help recover a lost drone. When you visit this site or fill in the form, basic technical information such as your browser type and IP address may be collected for security and notification purposes.</p>
+    <p>Information submitted via the contact form (name, location, message, and optionally your email) will only be used to contact you regarding the recovery of the drone. We do not share, sell, or use this information for any other purpose.</p>
+    <p>This site is hosted on GitHub Pages and may be proxied through Cloudflare for performance and DNS management. GitHub and Cloudflare may collect standard access logs as part of their services. Refer to their respective privacy policies:</p>
+    <ul>
+      <li><a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank">GitHub Privacy Statement</a></li>
+      <li><a href="https://www.cloudflare.com/privacypolicy/" target="_blank">Cloudflare Privacy Policy</a></li>
+    </ul>
+    <p>By using this site, you agree to these terms. If you have concerns about your data, please contact the owner directly using the contact number provided.</p>
+  </section>
   <footer>
     This drone is insured with FPV UK and covered by DJI Care. <br>
     Your information will only be used to contact you about the lost drone.
   </footer>
-
-  <script>
-    function getDeviceInfo() {
-      return `User Agent: ${navigator.userAgent}\nPlatform: ${navigator.platform}\nScreen: ${screen.width}x${screen.height}`;
-    }
-
-    function setDeviceAndLocation() {
-      document.getElementById('deviceInfo').value = getDeviceInfo();
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          const coords = `Lat: ${position.coords.latitude}, Lon: ${position.coords.longitude}`;
-          document.getElementById('locationData').value = coords;
-        }, function(error) {
-          document.getElementById('locationData').value = 'Location permission denied or unavailable';
-        });
-      } else {
-        document.getElementById('locationData').value = 'Geolocation not supported';
-      }
-    }
-
-    window.onload = setDeviceAndLocation;
-  </script>
 </body>
 </html>
