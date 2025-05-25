@@ -22,10 +22,13 @@
       width: 100%;
       text-align: center;
     }
+    header h1 {
+      color: white;
+    }
     main {
       max-width: 600px;
       background: #fff;
-      margin: 2rem;
+      margin: 2rem auto;
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
@@ -39,6 +42,7 @@
       margin: 0.5rem 0;
       border: 1px solid #ccc;
       border-radius: 8px;
+      box-sizing: border-box;
     }
     form button {
       background-color: #007aff;
@@ -67,7 +71,7 @@
     .privacy {
       max-width: 600px;
       background: #fff;
-      margin: 2rem;
+      margin: 2rem auto;
       padding: 1.5rem;
       border-radius: 12px;
       font-size: 0.9rem;
@@ -110,20 +114,13 @@
         cookieBanner.style.display = "none";
       };
 
-      // Insert IP address and location into hidden form fields
-      fetch("https://api.ipify.org?format=json")
-        .then(res => res.json())
-        .then(data => {
-          const ipField = document.getElementById("ip_address");
-          if (ipField) ipField.value = data.ip;
-        });
-
+      // Collect basic device info (with consent)
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-          const locField = document.getElementById("location");
-          if (locField) locField.value = `${position.coords.latitude}, ${position.coords.longitude}`;
+          console.log("Location: ", position.coords.latitude, position.coords.longitude);
         });
       }
+      console.log("Browser Info:", navigator.userAgent);
     };
   </script>
 </head>
@@ -141,11 +138,9 @@
     <p>Alternatively, fill out the form below and I’ll contact you back:</p>
     <form action="https://formspree.io/f/mzzrlzkp" method="POST">
       <input type="text" name="name" placeholder="Your name" required>
-      <input type="text" name="location_found" placeholder="Where did you find it?" required>
+      <input type="text" name="location" placeholder="Where did you find it?" required>
       <textarea name="message" rows="4" placeholder="Any extra details..." required></textarea>
       <input type="email" name="email" placeholder="Your email (optional)">
-      <input type="hidden" id="ip_address" name="ip_address">
-      <input type="hidden" id="location" name="location">
       <button type="submit">Send Message</button>
     </form>
     <div class="logos">
